@@ -61,19 +61,19 @@ bool check(const char *word)
     int hash_val = hash(to_chk);
     
     // creates node to check against word to check
-    node* _check = malloc(sizeof(node));
-    _check = hashtable[hash_val];
+
+    node* my_node = hashtable[hash_val];
 
     // checks our hash table for the provided word, if there is a value in that array index
-    while(_check != NULL)
+    while(my_node != NULL)
     {
-        if(strcmp( to_chk, _check->word) == 0)
+        if(strcmp( to_chk, my_node->word) == 0)
         {
             return true;
         }
         else
         {
-            _check = _check->next;
+            my_node = my_node->next;
         }
     }
     // returns false if the value doesn't exist
@@ -101,6 +101,7 @@ bool load(const char *dictionary)
     {
         //creates a node to store the scanned word and a pointer to the next word
         node* temp = malloc(sizeof(node));
+        memset(temp, 0, sizeof(node));
         temp->word = malloc(strlen(word) + 1); 
         strcpy(temp->word, word);
         
